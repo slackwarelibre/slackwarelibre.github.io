@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Slackware Libre</title>
+      	<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	    <meta name="author" content="Jefferson Carneiro"/>
+	    <meta name="description" content="Transforme seu Slackware 100% livre">
+	    <meta name="keywords" content="slackware, free software, software libre">
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="../../style.css">
+
+    </head>
+<body>
+    <nav>
+        <span style="font-size: 2em;"><h1>Slackware Libre | Estável</h1></span>
+
+        <p align='justify'>
+        <b>Autor :</b> Jefferson 'Slackjeff' Carneiro
+        <br>
+        <b>Versão:</b> Slackware 14.2
+        <br>
+        <b>Atualização:</b> 01/02/21
+        </p>
+        
+    </nav>
+
+<hr>
+
+<h2>Pacotes e arquivos não livres.</h2>
+
+<p>
+Abaixo uma pequena lista de pacotes que vem no Slackware 14.2 que contém software não livre, incompatibilidade com licença ou qualquer outra coisa que não está de acordo com a FSF.
+</p>
+
+<ul>
+    <li><b>getty-ps</b></li>
+    <i>Não comercial apenas. | main.c</i>
+    
+    <li><b>lha</b></li>
+    <i>Muito vago, de acordo com a FSF.</i>
+    
+    <li><b>unarj</b></li>
+    <i>Não é possível usar o código em arquivadores ARJ com suporte para codificação / decodificação. | unarj.c</i>
+    
+    <li><b>amp</b></li>
+    <i>Não comercial apenas.</i>
+
+    <li><b>seamonkey-solibs</b></li>
+    <i>Pode ser gratuito, mas é vinculado ao seamonkey.</i>
+    
+    <li><b>bluez-firmware</b></li>
+    <i>Todos os direitos reservados, sem código fonte. | broadcom/BCM-LEGAL.txt</i>
+    
+    <li><b>ipw2100</b></li>
+    <i>Sem código fonte, sem modificação e muito mais. | LICENSE</i>
+    
+    <li><b>ipw2200</b></li>
+    <i>Sem código fonte, sem modificação e muito mais. | LICENSE.ipw2200-fw</i>
+                  
+    <li><b>trn</b></li>
+    <i>Não comercial apenas. | EXTERN.h</i>
+    
+    <li><b>zd1211-firmware</b></li>
+    <i>Sem código fonte. | WS11UPh.h</i>
+          
+    <li><b>font-bh-ttf</b></li>
+    <i>Nenhuma modificação permitida. | COPYING</i>
+    
+    <li><b>font-bh-type1</b></li>
+    <i>Nenhuma modificação permitida. | COPYING</i>
+    
+    <li><b>mozilla-thunderbird</b></li>
+    <i>Libre, mas instala complementos não gratuitos, falha no FSDG.</i>
+
+    <li><b>mozilla-firefox</b></li>
+    <i>Libre, mas instala complementos não gratuitos, falha no FSDG.</i>
+    
+    <li><b>seamonkey</b></li>
+    <i>Libre, mas instala complementos não gratuitos, falha no FSDG.</i>
+
+    <li><b>xfractint</b></li>
+    <i>Não comercial apenas. | fractsrc.txt</i>
+    
+    <li><b>xgames</b></li>
+    <i>xminesweep não é comercial apenas. xminesweep.c</i>
+    
+    <li><b>xv</b></li>
+    <i>Nenhuma distribuição de cópias modificadas, apenas não comercial, apenas para uso pessoal. | copyright.h</i>
+    
+    <li><b>kernel-firmware</b></li>
+    <i>Blobs não livres estão incluídos.</i>
+
+    <li><b>kernel-generic</b></li>
+    <i>Se houver, carregará firmware não livre.</i>
+
+    <li><b>kernel-huge</b></li>
+    <i>Se houver, carregará firmware não livre.</i>
+
+    <li><b>kernel-modules</b></li>
+    <i>Se houver, carregará firmware não livre.</i>
+    
+    <li><b>kernel-headers</b></li>
+    <i>Gratuito, mas vinculado ao kernel.</i>
+    
+    <li><b>kernel-source</b></li>
+    <i>Blobs não livres estão incluídos.</i>
+</ul>
+
+<h2>Iniciando a remoção</h2>
+<div class='note'>
+<p>
+<b>NOTA!</b><br>
+É de extrema importância que você pense <b>BEM</b> antes de remover a parte do kernel e compilar/instalar o Kernel Linux Libre, o mesmo 'como é de se esperar' não tem total compatibilidade com alguns hardwares mais recentes e talvez mais antigos e muitas coisas podem deixar de funcionar.
+</p>
+
+<p>
+Um exemplo é minha placa de video RADEON RX 550 o firmware é removido e não tem carregamento do módulo no Linux libre. Então minha placa de video simplesmente não funciona e meus dois monitores não são reconhecidos mesmo se eu passar para a placa de video ONBOARD, por ser uma placa mãe AMD mais recente. Então é válido também se você tem uma placa mãe mais recente.
+</p>
+
+<p>
+Você pode seguir todos os passos mas pense mais na parte do kernel linux.
+</p>
+
+</div>
+
+<p>
+Vamos começar removendo os pacotes acima com o comando o gerenciador de pacotes de baixo nível do Slackware, <b>removepkg</b>. <i>Logue-se como root</i> e comece o processo. Eu deixei a parte do Kernel linux comentado, não será visto pelo gerenciador, se caso você deseja também remover o kernel para instalar/compilar o kernel linux libre retire o <b>#</b> da frente.
+</p>
+
+<pre class='code'>
+echo "Remove Packages..."; sleep 2s
+
+<b>removepkg</b> \
+    getty-ps              \
+    lha                   \
+    unarj                 \
+    amp                   \
+    seamonkey-solibs      \
+    bluez-firmware        \
+    ipw2100               \
+    ipw2200               \
+    trn                   \
+    zd1211-firmware       \
+    font-bh-ttf           \
+    font-bh-type1         \
+    mozilla-thunderbird   \
+    mozilla-firefox       \
+    seamonkey             \
+    xfractint             \
+    xgames                \
+    xv                    \
+    #kernel-firmware      \
+    #kernel-generic       \
+    #kernel-huge          \
+    #kernel-modules       \
+    #kernel-headers       \
+    #kernel-source    
+</pre>
+
+<p>
+<b>Importante</b>!!! se você usa o slackpkg para atualizar seu sistema é importante adicionar os pacotes que você removeu na <i>blacklist</i> para não ter mais futuros problemas. O arquivo está localizado em <i>/etc/slackpkg/blacklist</i>.
+</p>
+
+<p>
+É importante você saber que se estes pacotes não estarem no blacklist do slackpkg e tiver uma atualização/correção o mesmo vai aparecer para ser atualizado. Assim seu sistema será contaminado novamente.E por engano você pode acabar instalado novamente.
+</p>
+
+<pre class='code'>
+<b>cat</b> &lt;&lt;EOF &gt;&gt;/etc/slackpkg/blacklist
+# Slackware libre
+getty-ps
+lha
+unarj
+amp
+seamonkey-solibs
+bluez-firmware
+ipw2100
+ipw2200
+trn
+zd1211-firmware
+font-bh-ttf
+font-bh-type1
+mozilla-thunderbird
+mozilla-firefox
+seamonkey
+xfractint
+xgames
+xv
+</pre>
+
+<h2>Kernel Linux Libre</h2>
+
+<p>
+Se você removeu o kernel Linux do seu sistema e deseja usar o Kernel Linux libre, siga então o resto deste passo a passo! Se não o artigo acabou por aqui e lhe desejo uma boa computação.
+</p>
+
+<p>
+Caso contrário siga: Primeiramente entre em <a href='http://linux-libre.fsfla.org/pub/linux-libre/releases/' target='_blank'>fsfla.org</a> para baixar o kernel linux libre para sua máquina de compilação. Faça o download da versão que lhe interessar. Baixamos e descompactamos em /usr/src/ e seguimos o passo seguinte.
+</p>
+
+<p>
+<i>Este artigo foi "pego" do meu website e adaptado para esta outra necessidade. <a href='https://slackjeff.com.br/artigos/slackware/compilacao-kernel-linux-no-slackware.html'>https://slackjeff.com.br/artigos/slackware/compilacao-kernel-linux-no-slackware.html</a></i>
+</p>
+
+<pre class='code'>
+tar xvf linux-libre-5.10.12-gnu.tar.xz -C /usr/src/
+cd /usr/src
+ln -vs linux-libre-5.10.12-source linux
+    'linux/linux-libre-5.10.12-source' -> 'linux-libre-5.10.12-source/'
+</pre>
+
+<p>
+Se você criou o link simbólico, entre em "linux". Se não, entre no diretório onde está a fonte do kernel Linux direto. Dentro do diretório, vamos rodar o comando "make mrproper" para fazer uma limpeza e retirar as impurezas antes de iniciar a compilação:
+</p>
+
+<pre class='code'>
+cd linux
+make mrproper
+</pre>
+
+<p>
+Feito isso, vamos pegar a configuração dos módulos/drivers que está em execução no momento, note que o suporte, a config em /proc, deve estar habilitado no Kernel. Caso você rode o comando abaixo e não funcione, copie o ".config" de /boot.
+</p>
+
+<pre class='code'>
+# zcat /proc/config.gz > .config
+</pre>
+
+<p>
+O comando "zcat" pega o arquivo comprimido e envia para o STDOUT a saída. Fazendo isto, podemos redirecionar a saída para alguma lugar, no caso ".config". Vamos verificar quando módulos estão ativos no momento, isto para ter uma base apenas:
+</p>
+
+<pre class='code'>
+# grep =y < .config | wc -l
+1843
+</pre>
+
+<div class='note'>
+<b>NOTA!!</b>
+<p>
+Neste ponto, você pode querer rodar o "make olddefconfig". Uma rápida explicação: se você já tiver um arquivo ".config" que foi criado por uma outra versão do Linux, normalmente uma versão mais antiga, você vai precisar atualizar o mesmo.
+</p>
+
+<p>
+Temos alguns comandos para isso, o "make oldconfig", de uma forma interativa vai perguntar a você as perguntas correspondentes às novas opções de configuração disponibilizada. Se você não tiver tempo e quer algo rápido, você pode usar a resposta padrão para todas essas perguntas com o "make olddefconfig". O "make oldnoconfig", assume uma resposta negativa em todas as perguntas. Mas neste artigo, vamos usar um outro tipo de configuração. :)
+</p>
+</div>
+
+<h3>CONFIGURAÇÃO LOCAL</h3>
+<p>
+Usar uma configuração local é um bom meio de peneirar seu novo Kernel e existem muitos métodos para isto. Mas, vale ressaltar que estes métodos podem resultar em falhas na questão de não peneirar todos os drivers desnecessários.
+</p>
+
+<p>
+Então, mesmo assim, é interessante você fazer uma configuração a mais para conseguir retirar o máximo de módulos e opções desnecessárias do seu novo Kernel. Algumas configurações que eu utilizo:
+</p>
+
+<p>
+<b>localmodconfig</b>: Esta opção compila em módulos e não embutido no kernel.
+</p>
+<p>
+<b>localyesconfig</b>: É similar ao "localmodconfig", porém, compila de forma embutida os drivers, etc... ou seja, sem módulos externos.
+</p>
+
+<p>
+Vamos rodar o "make localmodconfig" para dar aquela peneirada básica no ".config". Note que como estamos pegando um ".config" de uma versão de Kernel diferente, você deve responder algumas perguntas na tela. Vamos também executar o "grep" novamente pra ver quantos módulos estão presentes nessa limpeza:</p>
+
+<pre class='code'>
+make localmodconfig
+grep =y < .config | wc -l
+1505
+</pre>
+
+<p>
+Note que deu uma pequena enxugada, agora chegou a hora de você agir! A compilação do kernel é tentativa e erros, comigo já aconteceu vários e vários Kernel Panics, é normal! Vou passar alguns comandos para você obter a informação do seu computador.
+</p>
+
+<h3>INFORMAÇÕES DA MÁQUINA</h3>
+
+<p>
+Quando vamos compilar o Kernel, precisamos saber informações da nossa máquina para ter um sucesso mais satisfatório e assim fazer um Kernel bem personalizado à nossa máquina. Existem alguns métodos para obter informações do seu sistema, irei te passar quatro formas de fazer isto e se usadas em conjunto, ficam bem completas.
+</p>
+
+<p>
+É interessante você redirecionar as saídas para algum arquivo em texto, para você estudar mais com calma todos os seus componentes necessários.
+</p>
+
+<pre class='code'>
+lspci -v
+lsusb -v
+lsmod
+cat /proc/cpuinfo | grep 'flags'
+</pre>
+
+<p>
+Retornando. Ok, feito o processo de busca de drivers necessários, vamos retornar à compilação. Vamos rodar o "make menuconfig", que abrirá uma tela amigável desenhada com NCurses para você fazer uma configuração mais satisfatória.
+</p>
+
+<p>
+Agora é com você! Existe uma coisa bem legal que pode ser feita, é alterar o Local version do kernel, você pode por o seu nome, por exemplo, algo tipo "-custom-slackjeff". Outra coisa a ser feita também, é ajustar a compressão do kernel, inicialmente ele vem como LZMA, trocamos para XZ, que além de ser mais rápido, ele comprime melhor.
+</p>
+
+<p>
+Meu computador não tem Wireless, ou algo relacionada a rádio amador e nem Bluetooth. O "localmodconfig" deixou escapar algumas coisas. É importante retirar o "lixo". Ficando com 1469 Módulos, no meu caso.
+</p>
+
+<p>
+Note que poderia ser enxugado mais ainda! Muito lixo eu deixei passar, mas quanto mais enxugar o negócio, mais a chance de algo der errado. Eu não quero isso, quero apenas um kernel um pouco mais personalizado. Se você necessita de algo extremamente pequeno, pesquise sobre: Linux Kernel Tinification.
+</p>
+
+<pre class='code'>
+grep =y < .config | wc -l
+1469
+</pre>
+
+<p>
+Agora, ao invés de fazer o meio tradicional, make BzImage etc... Vamos compilar o Kernel e gerar um "pacote.xz", este processo pode demorar um tempo, dependendo da sua máquina, para ir para próxima etapa do empacotamento para o Slackware. Mais opções em "make help".
+</p>
+
+<pre class='code'>
+make tarxz-pkg -j 4
+</pre>
+
+<p>
+O tarball será criado no mesmo diretório. Todo nosso Kernel prontinho para fazer fakeroot está neste pacote.
+</p>
+
+<pre class='code'>
+ls *.xz
+  linux-5.10.12-custom-slackjeff.tar.xz
+</pre>
+
+<p>
+Vamos agora fazer o pacote para o Slackware. O processo tradicional que estamos habituados, não vou falar muito sobre, pois já tenho artigo no meu site. Vou criar um diretório em /tmp chamado "linux" e descompactar o pacote ".xz" lá. Vamos entrar no diretório e criar um diretório "install":
+</p>
+
+<pre class='code'>
+mkdir -v /tmp/linux
+  mkdir: created directory '/tmp/linux'
+</pre>
+
+<pre class='code'>
+tar xvf linux-5.4.10-custom-slackjeff-x86.tar.xz -C /tmp/linux/
+cd /tmp/linux
+mkdir install
+</pre>
+
+<p>
+Feito isto, vamos gerar um arquivo "slack-desc" dentro do diretório "install" que acabamos de criar e preencher com informações:
+</p>
+
+<pre class='code'>
+# cat &lt;&lt;EOF &gt;&gt;/install/slack-desc
+       |-----handy-ruler------------------------------------------------------|
+appname: appname (Short description of the application)
+appname:
+appname: Description of application  -  this description should be fairly
+appname: in-depth; in other words, make it clear what the package does (and
+appname: maybe include relevant links and/or instructions if there's room),
+appname: but don't get too verbose.
+appname: This file can have a maximum of eleven (11) lines of text preceded by
+appname: the "appname: " designation.
+appname:
+appname: It's a good idea to include a link to the application's homepage too.
+appname:
+EOF
+</pre>
+
+<p>
+Preenchido todas informações do "slack-desc", vamos gerar o pacote. Note que você deve estar na raiz, onde o kernel está: /tmp/linux:
+</p>
+
+<pre class='code'>
+makepkg -l y -c n ../linux-libre-5.10.12-x86_64-1.txz
+</pre>
+
+<p>
+Feito isto vamos instalar, setar o "lilo.conf", rodar o LILO e reiniciar a máquina:
+</p>
+
+<pre class='code'>
+installpkg linux-5.4.10-x86_64-1.txz
+</pre>
+
+<pre class='code'>
+nano /etc/lilo.conf
+</pre>
+
+<pre class='code'>
+lilo
+  Warning: LBA32 addressing assumed
+  Added Linux  *
+  One warning was issued.
+
+shutdown -r now
+</pre>
+
+
+
+</body>
+</html>

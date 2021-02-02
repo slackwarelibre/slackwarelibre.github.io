@@ -1,0 +1,23 @@
+body {
+    max-width:50em;
+    margin:auto;
+    font-size: 18px;
+}
+
+#links {
+    margin-top: 1%;
+    padding: 1%;
+    border: 1px solid;
+}
+
+ul li { margin-top: 0.5%;margin-bottom: 0.5%;}
+
+/* for notes */
+.note {background-color: blue; color: white; padding: 1%; border-radius: 5px;}
+.code {
+    background-color: #d5d5d5;
+    color: black;
+    border-radius: 5px;
+    border: solid 1px black;
+    padding: 1%;
+}
